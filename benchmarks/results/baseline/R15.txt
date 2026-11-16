@@ -1,0 +1,102 @@
+=== R15 run 1 ===
+Limit  (cost=1296.01..1296.06 rows=20 width=17) (actual time=8.561..8.562 rows=20.00 loops=1)
+  Buffers: shared hit=15259
+  ->  Sort  (cost=1296.01..1296.19 rows=72 width=17) (actual time=8.560..8.561 rows=20.00 loops=1)
+        Sort Key: (count(*)) DESC
+        Sort Method: top-N heapsort  Memory: 26kB
+        Buffers: shared hit=15259
+        ->  HashAggregate  (cost=1293.37..1294.09 rows=72 width=17) (actual time=8.545..8.548 rows=72.00 loops=1)
+              Group Key: s.skill_name
+              Batches: 1  Memory Usage: 32kB
+              Buffers: shared hit=15256
+              ->  Hash Join  (cost=2.91..1291.73 rows=329 width=9) (actual time=1.081..7.068 rows=21785.00 loops=1)
+                    Hash Cond: (js.skill_id = s.skill_id)
+                    Buffers: shared hit=15256
+                    ->  Nested Loop  (cost=0.29..1288.19 rows=329 width=4) (actual time=1.065..5.776 rows=21785.00 loops=1)
+                          Buffers: shared hit=15255
+                          ->  Seq Scan on jobs j  (cost=0.00..489.00 rows=75 width=4) (actual time=1.059..1.703 rows=4972.00 loops=1)
+                                Filter: (EXTRACT(year FROM posted_at) = '2026'::numeric)
+                                Rows Removed by Filter: 10028
+                                Buffers: shared hit=264
+                          ->  Index Only Scan using job_skills_pkey on job_skills js  (cost=0.29..10.62 rows=4 width=8) (actual time=0.000..0.001 rows=4.38 loops=4972)
+                                Index Cond: (job_id = j.job_id)
+                                Heap Fetches: 21785
+                                Index Searches: 4972
+                                Buffers: shared hit=14991
+                    ->  Hash  (cost=1.72..1.72 rows=72 width=13) (actual time=0.013..0.013 rows=72.00 loops=1)
+                          Buckets: 1024  Batches: 1  Memory Usage: 12kB
+                          Buffers: shared hit=1
+                          ->  Seq Scan on skills s  (cost=0.00..1.72 rows=72 width=13) (actual time=0.002..0.004 rows=72.00 loops=1)
+                                Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=278
+Planning Time: 0.484 ms
+Execution Time: 8.599 ms
+=== R15 run 2 ===
+Limit  (cost=1296.01..1296.06 rows=20 width=17) (actual time=8.412..8.414 rows=20.00 loops=1)
+  Buffers: shared hit=15259
+  ->  Sort  (cost=1296.01..1296.19 rows=72 width=17) (actual time=8.412..8.413 rows=20.00 loops=1)
+        Sort Key: (count(*)) DESC
+        Sort Method: top-N heapsort  Memory: 26kB
+        Buffers: shared hit=15259
+        ->  HashAggregate  (cost=1293.37..1294.09 rows=72 width=17) (actual time=8.398..8.401 rows=72.00 loops=1)
+              Group Key: s.skill_name
+              Batches: 1  Memory Usage: 32kB
+              Buffers: shared hit=15256
+              ->  Hash Join  (cost=2.91..1291.73 rows=329 width=9) (actual time=0.977..6.918 rows=21785.00 loops=1)
+                    Hash Cond: (js.skill_id = s.skill_id)
+                    Buffers: shared hit=15256
+                    ->  Nested Loop  (cost=0.29..1288.19 rows=329 width=4) (actual time=0.961..5.645 rows=21785.00 loops=1)
+                          Buffers: shared hit=15255
+                          ->  Seq Scan on jobs j  (cost=0.00..489.00 rows=75 width=4) (actual time=0.956..1.608 rows=4972.00 loops=1)
+                                Filter: (EXTRACT(year FROM posted_at) = '2026'::numeric)
+                                Rows Removed by Filter: 10028
+                                Buffers: shared hit=264
+                          ->  Index Only Scan using job_skills_pkey on job_skills js  (cost=0.29..10.62 rows=4 width=8) (actual time=0.000..0.001 rows=4.38 loops=4972)
+                                Index Cond: (job_id = j.job_id)
+                                Heap Fetches: 21785
+                                Index Searches: 4972
+                                Buffers: shared hit=14991
+                    ->  Hash  (cost=1.72..1.72 rows=72 width=13) (actual time=0.012..0.013 rows=72.00 loops=1)
+                          Buckets: 1024  Batches: 1  Memory Usage: 12kB
+                          Buffers: shared hit=1
+                          ->  Seq Scan on skills s  (cost=0.00..1.72 rows=72 width=13) (actual time=0.002..0.004 rows=72.00 loops=1)
+                                Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=276
+Planning Time: 0.418 ms
+Execution Time: 8.445 ms
+=== R15 run 3 ===
+Limit  (cost=1296.01..1296.06 rows=20 width=17) (actual time=8.215..8.217 rows=20.00 loops=1)
+  Buffers: shared hit=15259
+  ->  Sort  (cost=1296.01..1296.19 rows=72 width=17) (actual time=8.215..8.216 rows=20.00 loops=1)
+        Sort Key: (count(*)) DESC
+        Sort Method: top-N heapsort  Memory: 26kB
+        Buffers: shared hit=15259
+        ->  HashAggregate  (cost=1293.37..1294.09 rows=72 width=17) (actual time=8.201..8.205 rows=72.00 loops=1)
+              Group Key: s.skill_name
+              Batches: 1  Memory Usage: 32kB
+              Buffers: shared hit=15256
+              ->  Hash Join  (cost=2.91..1291.73 rows=329 width=9) (actual time=0.981..6.752 rows=21785.00 loops=1)
+                    Hash Cond: (js.skill_id = s.skill_id)
+                    Buffers: shared hit=15256
+                    ->  Nested Loop  (cost=0.29..1288.19 rows=329 width=4) (actual time=0.965..5.507 rows=21785.00 loops=1)
+                          Buffers: shared hit=15255
+                          ->  Seq Scan on jobs j  (cost=0.00..489.00 rows=75 width=4) (actual time=0.960..1.577 rows=4972.00 loops=1)
+                                Filter: (EXTRACT(year FROM posted_at) = '2026'::numeric)
+                                Rows Removed by Filter: 10028
+                                Buffers: shared hit=264
+                          ->  Index Only Scan using job_skills_pkey on job_skills js  (cost=0.29..10.62 rows=4 width=8) (actual time=0.000..0.001 rows=4.38 loops=4972)
+                                Index Cond: (job_id = j.job_id)
+                                Heap Fetches: 21785
+                                Index Searches: 4972
+                                Buffers: shared hit=14991
+                    ->  Hash  (cost=1.72..1.72 rows=72 width=13) (actual time=0.014..0.014 rows=72.00 loops=1)
+                          Buckets: 1024  Batches: 1  Memory Usage: 12kB
+                          Buffers: shared hit=1
+                          ->  Seq Scan on skills s  (cost=0.00..1.72 rows=72 width=13) (actual time=0.002..0.004 rows=72.00 loops=1)
+                                Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=276
+Planning Time: 0.418 ms
+Execution Time: 8.247 ms

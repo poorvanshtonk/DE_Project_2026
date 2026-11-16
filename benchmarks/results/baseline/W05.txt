@@ -1,0 +1,81 @@
+=== W05 run 1 ===
+Update on applications a  (cost=51.43..513.99 rows=0 width=0) (actual time=2.908..2.909 rows=0.00 loops=1)
+  Buffers: shared hit=3545 dirtied=3 written=1
+  ->  Nested Loop  (cost=51.43..513.99 rows=7 width=58) (actual time=0.099..2.255 rows=119.00 loops=1)
+        Buffers: shared hit=2098
+        ->  Hash Join  (cost=51.01..504.48 rows=8 width=16) (actual time=0.080..1.288 rows=138.00 loops=1)
+              Hash Cond: (j.company_id = c.company_id)
+              Buffers: shared hit=290
+              ->  Seq Scan on jobs j  (cost=0.00..414.00 rows=15000 width=14) (actual time=0.003..0.846 rows=15000.00 loops=1)
+                    Buffers: shared hit=264
+              ->  Hash  (cost=51.00..51.00 rows=1 width=10) (actual time=0.070..0.070 rows=1.00 loops=1)
+                    Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                    Buffers: shared hit=26
+                    ->  Seq Scan on companies c  (cost=0.00..51.00 rows=1 width=10) (actual time=0.003..0.065 rows=1.00 loops=1)
+                          Filter: (company_name = 'TCS'::text)
+                          Rows Removed by Filter: 1999
+                          Buffers: shared hit=26
+        ->  Index Scan using applications_one_per_job_member on applications a  (cost=0.42..1.18 rows=1 width=10) (actual time=0.005..0.007 rows=0.86 loops=138)
+              Index Cond: (job_id = j.job_id)
+              Filter: ((status = 'APPLIED'::text) AND (applied_at < ('2026-07-01 00:00:00+05:30'::timestamp with time zone - '60 days'::interval)))
+              Rows Removed by Filter: 9
+              Index Searches: 138
+              Buffers: shared hit=1808
+Planning:
+  Buffers: shared hit=265
+Planning Time: 0.540 ms
+Execution Time: 2.966 ms
+=== W05 run 2 ===
+Update on applications a  (cost=51.43..514.00 rows=0 width=0) (actual time=2.857..2.858 rows=0.00 loops=1)
+  Buffers: shared hit=3977 dirtied=2
+  ->  Nested Loop  (cost=51.43..514.00 rows=7 width=58) (actual time=0.096..2.317 rows=119.00 loops=1)
+        Buffers: shared hit=2295
+        ->  Hash Join  (cost=51.01..504.48 rows=8 width=16) (actual time=0.078..1.204 rows=138.00 loops=1)
+              Hash Cond: (j.company_id = c.company_id)
+              Buffers: shared hit=290
+              ->  Seq Scan on jobs j  (cost=0.00..414.00 rows=15000 width=14) (actual time=0.003..0.752 rows=15000.00 loops=1)
+                    Buffers: shared hit=264
+              ->  Hash  (cost=51.00..51.00 rows=1 width=10) (actual time=0.068..0.068 rows=1.00 loops=1)
+                    Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                    Buffers: shared hit=26
+                    ->  Seq Scan on companies c  (cost=0.00..51.00 rows=1 width=10) (actual time=0.003..0.063 rows=1.00 loops=1)
+                          Filter: (company_name = 'TCS'::text)
+                          Rows Removed by Filter: 1999
+                          Buffers: shared hit=26
+        ->  Index Scan using applications_one_per_job_member on applications a  (cost=0.42..1.18 rows=1 width=10) (actual time=0.006..0.008 rows=0.86 loops=138)
+              Index Cond: (job_id = j.job_id)
+              Filter: ((status = 'APPLIED'::text) AND (applied_at < ('2026-07-01 00:00:00+05:30'::timestamp with time zone - '60 days'::interval)))
+              Rows Removed by Filter: 9
+              Index Searches: 138
+              Buffers: shared hit=2005
+Planning:
+  Buffers: shared hit=265
+Planning Time: 0.453 ms
+Execution Time: 2.907 ms
+=== W05 run 3 ===
+Update on applications a  (cost=51.43..514.00 rows=0 width=0) (actual time=2.713..2.713 rows=0.00 loops=1)
+  Buffers: shared hit=3978 dirtied=2
+  ->  Nested Loop  (cost=51.43..514.00 rows=7 width=58) (actual time=0.095..2.194 rows=119.00 loops=1)
+        Buffers: shared hit=2295
+        ->  Hash Join  (cost=51.01..504.48 rows=8 width=16) (actual time=0.077..1.153 rows=138.00 loops=1)
+              Hash Cond: (j.company_id = c.company_id)
+              Buffers: shared hit=290
+              ->  Seq Scan on jobs j  (cost=0.00..414.00 rows=15000 width=14) (actual time=0.003..0.721 rows=15000.00 loops=1)
+                    Buffers: shared hit=264
+              ->  Hash  (cost=51.00..51.00 rows=1 width=10) (actual time=0.068..0.068 rows=1.00 loops=1)
+                    Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                    Buffers: shared hit=26
+                    ->  Seq Scan on companies c  (cost=0.00..51.00 rows=1 width=10) (actual time=0.003..0.063 rows=1.00 loops=1)
+                          Filter: (company_name = 'TCS'::text)
+                          Rows Removed by Filter: 1999
+                          Buffers: shared hit=26
+        ->  Index Scan using applications_one_per_job_member on applications a  (cost=0.42..1.18 rows=1 width=10) (actual time=0.006..0.007 rows=0.86 loops=138)
+              Index Cond: (job_id = j.job_id)
+              Filter: ((status = 'APPLIED'::text) AND (applied_at < ('2026-07-01 00:00:00+05:30'::timestamp with time zone - '60 days'::interval)))
+              Rows Removed by Filter: 9
+              Index Searches: 138
+              Buffers: shared hit=2005
+Planning:
+  Buffers: shared hit=265
+Planning Time: 0.475 ms
+Execution Time: 2.761 ms

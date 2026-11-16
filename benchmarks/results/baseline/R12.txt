@@ -1,0 +1,63 @@
+=== R12 run 1 ===
+GroupAggregate  (cost=51.01..2116.83 rows=1 width=59) (actual time=4.640..4.641 rows=1.00 loops=1)
+  Buffers: shared hit=1002
+  ->  Hash Join  (cost=51.01..2116.60 rows=17 width=23) (actual time=0.085..4.615 rows=152.00 loops=1)
+        Hash Cond: (p.company_id = c.company_id)
+        Buffers: shared hit=1002
+        ->  Seq Scan on positions p  (cost=0.00..1975.40 rows=34286 width=8) (actual time=0.004..3.754 rows=34238.00 loops=1)
+              Filter: (end_date IS NULL)
+              Rows Removed by Filter: 65702
+              Buffers: shared hit=976
+        ->  Hash  (cost=51.00..51.00 rows=1 width=23) (actual time=0.072..0.073 rows=1.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 9kB
+              Buffers: shared hit=26
+              ->  Seq Scan on companies c  (cost=0.00..51.00 rows=1 width=23) (actual time=0.003..0.066 rows=1.00 loops=1)
+                    Filter: (company_name = 'Flipkart'::text)
+                    Rows Removed by Filter: 1999
+                    Buffers: shared hit=26
+Planning:
+  Buffers: shared hit=208
+Planning Time: 0.301 ms
+Execution Time: 4.672 ms
+=== R12 run 2 ===
+GroupAggregate  (cost=51.01..2116.83 rows=1 width=59) (actual time=4.502..4.502 rows=1.00 loops=1)
+  Buffers: shared hit=1002
+  ->  Hash Join  (cost=51.01..2116.60 rows=17 width=23) (actual time=0.082..4.479 rows=152.00 loops=1)
+        Hash Cond: (p.company_id = c.company_id)
+        Buffers: shared hit=1002
+        ->  Seq Scan on positions p  (cost=0.00..1975.40 rows=34286 width=8) (actual time=0.004..3.632 rows=34238.00 loops=1)
+              Filter: (end_date IS NULL)
+              Rows Removed by Filter: 65702
+              Buffers: shared hit=976
+        ->  Hash  (cost=51.00..51.00 rows=1 width=23) (actual time=0.069..0.069 rows=1.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 9kB
+              Buffers: shared hit=26
+              ->  Seq Scan on companies c  (cost=0.00..51.00 rows=1 width=23) (actual time=0.003..0.063 rows=1.00 loops=1)
+                    Filter: (company_name = 'Flipkart'::text)
+                    Rows Removed by Filter: 1999
+                    Buffers: shared hit=26
+Planning:
+  Buffers: shared hit=208
+Planning Time: 0.294 ms
+Execution Time: 4.531 ms
+=== R12 run 3 ===
+GroupAggregate  (cost=51.01..2116.83 rows=1 width=59) (actual time=4.545..4.546 rows=1.00 loops=1)
+  Buffers: shared hit=1002
+  ->  Hash Join  (cost=51.01..2116.60 rows=17 width=23) (actual time=0.082..4.522 rows=152.00 loops=1)
+        Hash Cond: (p.company_id = c.company_id)
+        Buffers: shared hit=1002
+        ->  Seq Scan on positions p  (cost=0.00..1975.40 rows=34286 width=8) (actual time=0.004..3.690 rows=34238.00 loops=1)
+              Filter: (end_date IS NULL)
+              Rows Removed by Filter: 65702
+              Buffers: shared hit=976
+        ->  Hash  (cost=51.00..51.00 rows=1 width=23) (actual time=0.069..0.069 rows=1.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 9kB
+              Buffers: shared hit=26
+              ->  Seq Scan on companies c  (cost=0.00..51.00 rows=1 width=23) (actual time=0.003..0.064 rows=1.00 loops=1)
+                    Filter: (company_name = 'Flipkart'::text)
+                    Rows Removed by Filter: 1999
+                    Buffers: shared hit=26
+Planning:
+  Buffers: shared hit=208
+Planning Time: 0.287 ms
+Execution Time: 4.574 ms

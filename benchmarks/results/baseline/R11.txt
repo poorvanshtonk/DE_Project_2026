@@ -1,0 +1,72 @@
+=== R11 run 1 ===
+Sort  (cost=4028.82..4028.83 rows=1 width=48) (actual time=4.055..4.553 rows=6.00 loops=1)
+  Sort Key: (max(viewed_at)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1270
+  ->  GroupAggregate  (cost=4028.79..4028.81 rows=1 width=48) (actual time=4.046..4.546 rows=6.00 loops=1)
+        Group Key: (COALESCE((viewer_id)::text, 'Someone in private mode'::text))
+        Buffers: shared hit=1267
+        ->  Sort  (cost=4028.79..4028.79 rows=1 width=40) (actual time=4.043..4.541 rows=6.00 loops=1)
+              Sort Key: (COALESCE((viewer_id)::text, 'Someone in private mode'::text))
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=1267
+              ->  Gather  (cost=1000.00..4028.78 rows=1 width=40) (actual time=3.543..4.518 rows=6.00 loops=1)
+                    Workers Planned: 1
+                    Workers Launched: 1
+                    Buffers: shared hit=1264
+                    ->  Parallel Seq Scan on profile_views v  (cost=0.00..3028.68 rows=1 width=40) (actual time=2.734..3.199 rows=3.00 loops=2)
+                          Filter: ((viewed_at >= '2026-04-01 00:00:00+05:30'::timestamp with time zone) AND (viewed_id = 217))
+                          Rows Removed by Filter: 99995
+                          Buffers: shared hit=1264
+Planning:
+  Buffers: shared hit=123
+Planning Time: 0.196 ms
+Execution Time: 4.583 ms
+=== R11 run 2 ===
+Sort  (cost=4028.82..4028.83 rows=1 width=48) (actual time=3.985..4.438 rows=6.00 loops=1)
+  Sort Key: (max(viewed_at)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1270
+  ->  GroupAggregate  (cost=4028.79..4028.81 rows=1 width=48) (actual time=3.977..4.432 rows=6.00 loops=1)
+        Group Key: (COALESCE((viewer_id)::text, 'Someone in private mode'::text))
+        Buffers: shared hit=1267
+        ->  Sort  (cost=4028.79..4028.79 rows=1 width=40) (actual time=3.974..4.427 rows=6.00 loops=1)
+              Sort Key: (COALESCE((viewer_id)::text, 'Someone in private mode'::text))
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=1267
+              ->  Gather  (cost=1000.00..4028.78 rows=1 width=40) (actual time=3.481..4.413 rows=6.00 loops=1)
+                    Workers Planned: 1
+                    Workers Launched: 1
+                    Buffers: shared hit=1264
+                    ->  Parallel Seq Scan on profile_views v  (cost=0.00..3028.68 rows=1 width=40) (actual time=2.678..3.143 rows=3.00 loops=2)
+                          Filter: ((viewed_at >= '2026-04-01 00:00:00+05:30'::timestamp with time zone) AND (viewed_id = 217))
+                          Rows Removed by Filter: 99995
+                          Buffers: shared hit=1264
+Planning:
+  Buffers: shared hit=123
+Planning Time: 0.172 ms
+Execution Time: 4.466 ms
+=== R11 run 3 ===
+Sort  (cost=4028.82..4028.83 rows=1 width=48) (actual time=4.012..4.492 rows=6.00 loops=1)
+  Sort Key: (max(viewed_at)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1270
+  ->  GroupAggregate  (cost=4028.79..4028.81 rows=1 width=48) (actual time=4.004..4.485 rows=6.00 loops=1)
+        Group Key: (COALESCE((viewer_id)::text, 'Someone in private mode'::text))
+        Buffers: shared hit=1267
+        ->  Sort  (cost=4028.79..4028.79 rows=1 width=40) (actual time=4.001..4.481 rows=6.00 loops=1)
+              Sort Key: (COALESCE((viewer_id)::text, 'Someone in private mode'::text))
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=1267
+              ->  Gather  (cost=1000.00..4028.78 rows=1 width=40) (actual time=3.504..4.466 rows=6.00 loops=1)
+                    Workers Planned: 1
+                    Workers Launched: 1
+                    Buffers: shared hit=1264
+                    ->  Parallel Seq Scan on profile_views v  (cost=0.00..3028.68 rows=1 width=40) (actual time=2.715..3.181 rows=3.00 loops=2)
+                          Filter: ((viewed_at >= '2026-04-01 00:00:00+05:30'::timestamp with time zone) AND (viewed_id = 217))
+                          Rows Removed by Filter: 99995
+                          Buffers: shared hit=1264
+Planning:
+  Buffers: shared hit=123
+Planning Time: 0.173 ms
+Execution Time: 4.520 ms
