@@ -767,3 +767,6 @@ WHERE a.job_id = j.job_id
   AND a.status = 'APPLIED'
   AND a.applied_at < TIMESTAMPTZ '2026-07-01 00:00:00+05:30' - interval '60 days';
 ```
+
+
+** Test
