@@ -1,0 +1,31 @@
+query_id,type,avg_ms,median_ms,min_ms,max_ms,scan_nodes
+R01,READ,0.374,0.206,0.201,0.714,Index Scan using members_pkey on members | Index Only Scan using positions_member_start_idx on positions | Index Scan using companies_pkey on companies
+R02,READ,0.401,0.234,0.112,0.856,Index Only Scan using positions_member_start_idx on positions | Index Scan using companies_pkey on companies
+R03,READ,0.546,0.174,0.107,1.356,Index Scan using connections_pkey on connections | Index Only Scan using connections_member_b_idx on connections
+R04,READ,0.406,0.206,0.161,0.852,Index Only Scan using connections_pkey on connections | Index Only Scan using connections_member_b_idx on connections
+R05,READ,8.552,2.124,2.080,21.451,Index Only Scan using connections_pkey on connections | Index Only Scan using connections_member_b_idx on connections
+R06,READ,12.573,10.294,10.064,17.360,Index Scan using jobs_posted_idx on jobs | Index Scan using companies_pkey on companies
+R07,READ,40.584,37.549,34.955,49.247,Seq Scan on job_skills | Index Only Scan using jobs_open_id_idx on jobs | Index Only Scan using member_skills_pkey on member_skills
+R08,READ,0.199,0.062,0.055,0.479,Index Scan using applications_one_per_job_member on applications
+R09,READ,0.250,0.067,0.059,0.625,Index Only Scan using applications_member_applied_idx on applications | Index Scan using jobs_pkey on jobs | Index Scan using companies_pkey on companies
+R10,READ,0.063,0.064,0.042,0.083,Index Only Scan using invitations_pending_recipient_idx on invitations | Index Scan using members_pkey on members
+R11,READ,0.353,0.247,0.246,0.565,Index Only Scan using profile_views_viewed_time_idx on profile_views
+R12,READ,5.340,4.555,3.754,7.711,Seq Scan on companies | Index Only Scan using positions_current_company_idx on positions
+R13,READ,252.048,236.162,234.944,285.038,Seq Scan on members | Seq Scan on profile_views
+R14,READ,118.550,114.976,113.482,127.193,Seq Scan on jobs | Bitmap Heap Scan on applications | Bitmap Index Scan on applications_hired_updated_idx | Seq Scan on companies
+R15,READ,59.962,59.787,59.512,60.587,Seq Scan on job_skills | Index Only Scan using jobs_posted_idx on jobs | Seq Scan on skills
+R16,READ,10.483,10.312,10.256,10.880,Index Scan using jobs_posted_idx on jobs | Seq Scan on cities
+R17,READ,643.054,641.531,635.992,651.638,Index Only Scan using positions_member_start_idx on positions | Seq Scan on companies | Index Scan using companies_pkey on companies
+R18,READ,26.888,26.351,26.313,28.001,Seq Scan on members | Seq Scan on skills | Index Only Scan using member_skills_skill_rank_idx on member_skills
+R19,READ,50.049,47.195,46.972,55.981,Index Scan using jobs_open_id_idx on jobs | Index Only Scan using applications_applied_desc_idx on applications | Seq Scan on jobs | Seq Scan on companies
+R20,READ,29.721,29.782,29.553,29.829,Index Only Scan using applications_applied_desc_idx on applications
+R21,READ,0.395,0.349,0.343,0.492,Seq Scan on skills | Index Only Scan using member_skills_skill_rank_idx on member_skills
+R22,READ,11.683,11.537,10.805,12.707,Index Only Scan using applications_applied_desc_idx on applications
+R23,READ,0.038,0.031,0.029,0.053,Index Scan using members_lower_email_idx on members
+R24,READ,90.756,87.529,85.914,98.824,Seq Scan on members | Index Only Scan using invitations_sent_sender_idx on invitations
+R25,READ,610.110,612.297,599.010,619.022,Index Only Scan using positions_member_start_idx on positions
+W01,WRITE,1.064,0.670,0.630,1.891,(no scan)
+W02,WRITE,0.434,0.145,0.129,1.028,Index Only Scan using invitations_pending_recipient_idx on invitations | Index Scan using invitations_pkey on invitations
+W03,WRITE,1.055,1.060,0.866,1.240,Index Only Scan using invitations_pending_recipient_idx on invitations | Index Scan using invitations_pkey on invitations
+W04,WRITE,370.741,181.658,116.084,814.482,Index Scan using jobs_expired_open_idx on jobs
+W05,WRITE,70.843,7.966,6.979,197.584,Seq Scan on companies | Bitmap Heap Scan on jobs | Bitmap Index Scan on jobs_company_status_idx | Index Scan using applications_unreviewed_job_date_idx on applications

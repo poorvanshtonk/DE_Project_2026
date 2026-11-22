@@ -1,0 +1,54 @@
+=== R20 run 1 ===
+WindowAgg  (cost=25624.00..33051.16 rows=165048 width=44) (actual time=24.025..29.707 rows=30 loops=1)
+  Buffers: shared hit=2602
+  ->  GroupAggregate  (cost=25624.00..28924.96 rows=165048 width=12) (actual time=23.808..29.685 rows=30 loops=1)
+        Group Key: ((applications.applied_at)::date)
+        Buffers: shared hit=2602
+        ->  Sort  (cost=25624.00..26036.62 rows=165048 width=4) (actual time=23.607..26.117 rows=164835 loops=1)
+              Sort Key: ((applications.applied_at)::date)
+              Sort Method: quicksort  Memory: 4096kB
+              Buffers: shared hit=2602
+              ->  Index Only Scan using applications_applied_desc_idx on applications  (cost=0.43..9063.01 rows=165048 width=4) (actual time=0.005..19.171 rows=164835 loops=1)
+                    Index Cond: ((applied_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (applied_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 164835
+                    Buffers: shared hit=2599
+Planning:
+  Buffers: shared hit=213
+Planning Time: 0.317 ms
+Execution Time: 29.782 ms
+=== R20 run 2 ===
+WindowAgg  (cost=25624.00..33051.16 rows=165048 width=44) (actual time=23.924..29.515 rows=30 loops=1)
+  Buffers: shared hit=2602
+  ->  GroupAggregate  (cost=25624.00..28924.96 rows=165048 width=12) (actual time=23.713..29.495 rows=30 loops=1)
+        Group Key: ((applications.applied_at)::date)
+        Buffers: shared hit=2602
+        ->  Sort  (cost=25624.00..26036.62 rows=165048 width=4) (actual time=23.503..25.978 rows=164835 loops=1)
+              Sort Key: ((applications.applied_at)::date)
+              Sort Method: quicksort  Memory: 4096kB
+              Buffers: shared hit=2602
+              ->  Index Only Scan using applications_applied_desc_idx on applications  (cost=0.43..9063.01 rows=165048 width=4) (actual time=0.004..19.167 rows=164835 loops=1)
+                    Index Cond: ((applied_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (applied_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 164835
+                    Buffers: shared hit=2599
+Planning:
+  Buffers: shared hit=213
+Planning Time: 0.318 ms
+Execution Time: 29.553 ms
+=== R20 run 3 ===
+WindowAgg  (cost=25624.00..33051.16 rows=165048 width=44) (actual time=24.108..29.792 rows=30 loops=1)
+  Buffers: shared hit=2602
+  ->  GroupAggregate  (cost=25624.00..28924.96 rows=165048 width=12) (actual time=23.910..29.770 rows=30 loops=1)
+        Group Key: ((applications.applied_at)::date)
+        Buffers: shared hit=2602
+        ->  Sort  (cost=25624.00..26036.62 rows=165048 width=4) (actual time=23.717..26.211 rows=164835 loops=1)
+              Sort Key: ((applications.applied_at)::date)
+              Sort Method: quicksort  Memory: 4096kB
+              Buffers: shared hit=2602
+              ->  Index Only Scan using applications_applied_desc_idx on applications  (cost=0.43..9063.01 rows=165048 width=4) (actual time=0.004..19.405 rows=164835 loops=1)
+                    Index Cond: ((applied_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (applied_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 164835
+                    Buffers: shared hit=2599
+Planning:
+  Buffers: shared hit=213
+Planning Time: 0.302 ms
+Execution Time: 29.829 ms

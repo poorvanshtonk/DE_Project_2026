@@ -1,0 +1,57 @@
+=== R13 run 1 ===
+Gather  (cost=69564.94..121983.40 rows=245850 width=15) (actual time=223.311..282.534 rows=130313 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=11796 read=25484, temp read=12153 written=12452
+  ->  Parallel Hash Anti Join  (cost=68564.94..96398.40 rows=102438 width=15) (actual time=219.353..268.255 rows=43438 loops=3)
+        Hash Cond: (m.member_id = v.viewer_id)
+        Buffers: shared hit=11796 read=25484, temp read=12153 written=12452
+        ->  Parallel Seq Scan on members m  (cost=0.00..15907.33 rows=333333 width=15) (actual time=0.006..15.500 rows=266667 loops=3)
+              Buffers: shared hit=11148 read=1426
+        ->  Parallel Hash  (cost=41220.64..41220.64 rows=1666664 width=4) (actual time=172.174..172.174 rows=1333331 loops=3)
+              Buckets: 262144  Batches: 32  Memory Usage: 5760kB
+              Buffers: shared hit=496 read=24058, temp written=8660
+              ->  Parallel Seq Scan on profile_views v  (cost=0.00..41220.64 rows=1666664 width=4) (actual time=0.039..64.161 rows=1333331 loops=3)
+                    Buffers: shared hit=496 read=24058
+Planning:
+  Buffers: shared hit=266
+Planning Time: 0.977 ms
+Execution Time: 285.038 ms
+=== R13 run 2 ===
+Gather  (cost=69564.94..121983.40 rows=245850 width=15) (actual time=182.033..233.836 rows=130313 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=11988 read=25292, temp read=12149 written=12556
+  ->  Parallel Hash Anti Join  (cost=68564.94..96398.40 rows=102438 width=15) (actual time=179.547..223.717 rows=43438 loops=3)
+        Hash Cond: (m.member_id = v.viewer_id)
+        Buffers: shared hit=11988 read=25292, temp read=12149 written=12556
+        ->  Parallel Seq Scan on members m  (cost=0.00..15907.33 rows=333333 width=15) (actual time=0.007..15.480 rows=266667 loops=3)
+              Buffers: shared hit=11244 read=1330
+        ->  Parallel Hash  (cost=41220.64..41220.64 rows=1666664 width=4) (actual time=135.094..135.094 rows=1333331 loops=3)
+              Buckets: 262144  Batches: 32  Memory Usage: 5760kB
+              Buffers: shared hit=592 read=23962, temp written=8732
+              ->  Parallel Seq Scan on profile_views v  (cost=0.00..41220.64 rows=1666664 width=4) (actual time=0.018..55.933 rows=1333331 loops=3)
+                    Buffers: shared hit=592 read=23962
+Planning:
+  Buffers: shared hit=266
+Planning Time: 0.478 ms
+Execution Time: 236.162 ms
+=== R13 run 3 ===
+Gather  (cost=69564.94..121983.40 rows=245850 width=15) (actual time=176.922..232.596 rows=130313 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=12180 read=25100, temp read=12151 written=12376
+  ->  Parallel Hash Anti Join  (cost=68564.94..96398.40 rows=102438 width=15) (actual time=174.967..221.539 rows=43438 loops=3)
+        Hash Cond: (m.member_id = v.viewer_id)
+        Buffers: shared hit=12180 read=25100, temp read=12151 written=12376
+        ->  Parallel Seq Scan on members m  (cost=0.00..15907.33 rows=333333 width=15) (actual time=0.005..15.480 rows=266667 loops=3)
+              Buffers: shared hit=11340 read=1234
+        ->  Parallel Hash  (cost=41220.64..41220.64 rows=1666664 width=4) (actual time=130.036..130.036 rows=1333331 loops=3)
+              Buckets: 262144  Batches: 32  Memory Usage: 5760kB
+              Buffers: shared hit=688 read=23866, temp written=8688
+              ->  Parallel Seq Scan on profile_views v  (cost=0.00..41220.64 rows=1666664 width=4) (actual time=0.016..56.104 rows=1333331 loops=3)
+                    Buffers: shared hit=688 read=23866
+Planning:
+  Buffers: shared hit=266
+Planning Time: 0.476 ms
+Execution Time: 234.944 ms

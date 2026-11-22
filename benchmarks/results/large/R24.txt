@@ -1,0 +1,108 @@
+=== R24 run 1 ===
+Finalize GroupAggregate  (cost=41017.79..41018.33 rows=2 width=41) (actual time=97.397..98.776 rows=2 loops=1)
+  Group Key: m.is_premium
+  Buffers: shared hit=1241 read=15570
+  ->  Gather Merge  (cost=41017.79..41018.26 rows=4 width=17) (actual time=97.388..98.768 rows=6 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=1241 read=15570
+        ->  Sort  (cost=40017.77..40017.77 rows=2 width=17) (actual time=95.406..95.407 rows=2 loops=3)
+              Sort Key: m.is_premium
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=1241 read=15570
+              Worker 0:  Sort Method: quicksort  Memory: 25kB
+              Worker 1:  Sort Method: quicksort  Memory: 25kB
+              ->  Partial HashAggregate  (cost=40017.74..40017.76 rows=2 width=17) (actual time=95.392..95.393 rows=2 loops=3)
+                    Group Key: m.is_premium
+                    Batches: 1  Memory Usage: 24kB
+                    Buffers: shared hit=1225 read=15570
+                    Worker 0:  Batches: 1  Memory Usage: 24kB
+                    Worker 1:  Batches: 1  Memory Usage: 24kB
+                    ->  Parallel Hash Join  (cost=20482.88..38339.48 rows=167826 width=9) (actual time=27.174..87.184 rows=132601 loops=3)
+                          Hash Cond: (m.member_id = i.sender_id)
+                          Buffers: shared hit=1225 read=15570
+                          ->  Parallel Seq Scan on members m  (cost=0.00..15907.33 rows=333333 width=5) (actual time=0.038..11.735 rows=266667 loops=3)
+                                Buffers: shared hit=289 read=12285
+                          ->  Parallel Hash  (cost=18385.05..18385.05 rows=167826 width=12) (actual time=26.983..26.983 rows=132601 loops=3)
+                                Buckets: 524288  Batches: 1  Memory Usage: 22816kB
+                                Buffers: shared hit=908 read=3285
+                                ->  Parallel Index Only Scan using invitations_sent_sender_idx on invitations i  (cost=0.43..18385.05 rows=167826 width=12) (actual time=0.052..15.480 rows=132601 loops=3)
+                                      Index Cond: (sent_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                      Heap Fetches: 133502
+                                      Buffers: shared hit=908 read=3285
+Planning:
+  Buffers: shared hit=308 read=4
+Planning Time: 0.469 ms
+Execution Time: 98.824 ms
+=== R24 run 2 ===
+Finalize GroupAggregate  (cost=41017.79..41018.33 rows=2 width=41) (actual time=86.211..87.484 rows=2 loops=1)
+  Group Key: m.is_premium
+  Buffers: shared hit=4404 read=12189
+  ->  Gather Merge  (cost=41017.79..41018.26 rows=4 width=17) (actual time=86.203..87.477 rows=6 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=4404 read=12189
+        ->  Sort  (cost=40017.77..40017.77 rows=2 width=17) (actual time=84.764..84.764 rows=2 loops=3)
+              Sort Key: m.is_premium
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=4404 read=12189
+              Worker 0:  Sort Method: quicksort  Memory: 25kB
+              Worker 1:  Sort Method: quicksort  Memory: 25kB
+              ->  Partial HashAggregate  (cost=40017.74..40017.76 rows=2 width=17) (actual time=84.753..84.754 rows=2 loops=3)
+                    Group Key: m.is_premium
+                    Batches: 1  Memory Usage: 24kB
+                    Buffers: shared hit=4388 read=12189
+                    Worker 0:  Batches: 1  Memory Usage: 24kB
+                    Worker 1:  Batches: 1  Memory Usage: 24kB
+                    ->  Parallel Hash Join  (cost=20482.88..38339.48 rows=167826 width=9) (actual time=18.765..76.902 rows=132601 loops=3)
+                          Hash Cond: (m.member_id = i.sender_id)
+                          Buffers: shared hit=4388 read=12189
+                          ->  Parallel Seq Scan on members m  (cost=0.00..15907.33 rows=333333 width=5) (actual time=0.042..11.338 rows=266667 loops=3)
+                                Buffers: shared hit=385 read=12189
+                          ->  Parallel Hash  (cost=18385.05..18385.05 rows=167826 width=12) (actual time=18.580..18.581 rows=132601 loops=3)
+                                Buckets: 524288  Batches: 1  Memory Usage: 22816kB
+                                Buffers: shared hit=3975
+                                ->  Parallel Index Only Scan using invitations_sent_sender_idx on invitations i  (cost=0.43..18385.05 rows=167826 width=12) (actual time=0.021..9.647 rows=132601 loops=3)
+                                      Index Cond: (sent_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                      Heap Fetches: 121481
+                                      Buffers: shared hit=3975
+Planning:
+  Buffers: shared hit=312
+Planning Time: 0.404 ms
+Execution Time: 87.529 ms
+=== R24 run 3 ===
+Finalize GroupAggregate  (cost=41017.79..41018.33 rows=2 width=41) (actual time=84.545..85.874 rows=2 loops=1)
+  Group Key: m.is_premium
+  Buffers: shared hit=4304 read=12093
+  ->  Gather Merge  (cost=41017.79..41018.26 rows=4 width=17) (actual time=84.536..85.866 rows=6 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=4304 read=12093
+        ->  Sort  (cost=40017.77..40017.77 rows=2 width=17) (actual time=83.012..83.012 rows=2 loops=3)
+              Sort Key: m.is_premium
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=4304 read=12093
+              Worker 0:  Sort Method: quicksort  Memory: 25kB
+              Worker 1:  Sort Method: quicksort  Memory: 25kB
+              ->  Partial HashAggregate  (cost=40017.74..40017.76 rows=2 width=17) (actual time=83.001..83.002 rows=2 loops=3)
+                    Group Key: m.is_premium
+                    Batches: 1  Memory Usage: 24kB
+                    Buffers: shared hit=4288 read=12093
+                    Worker 0:  Batches: 1  Memory Usage: 24kB
+                    Worker 1:  Batches: 1  Memory Usage: 24kB
+                    ->  Parallel Hash Join  (cost=20482.88..38339.48 rows=167826 width=9) (actual time=16.699..75.111 rows=132601 loops=3)
+                          Hash Cond: (m.member_id = i.sender_id)
+                          Buffers: shared hit=4288 read=12093
+                          ->  Parallel Seq Scan on members m  (cost=0.00..15907.33 rows=333333 width=5) (actual time=0.035..11.354 rows=266667 loops=3)
+                                Buffers: shared hit=481 read=12093
+                          ->  Parallel Hash  (cost=18385.05..18385.05 rows=167826 width=12) (actual time=16.515..16.515 rows=132601 loops=3)
+                                Buckets: 524288  Batches: 1  Memory Usage: 22816kB
+                                Buffers: shared hit=3779
+                                ->  Parallel Index Only Scan using invitations_sent_sender_idx on invitations i  (cost=0.43..18385.05 rows=167826 width=12) (actual time=0.021..8.260 rows=132601 loops=3)
+                                      Index Cond: (sent_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                      Heap Fetches: 110383
+                                      Buffers: shared hit=3779
+Planning:
+  Buffers: shared hit=312
+Planning Time: 0.400 ms
+Execution Time: 85.914 ms

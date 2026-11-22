@@ -1,0 +1,45 @@
+=== R06 run 1 ===
+Nested Loop  (cost=0.71..1728.86 rows=90 width=69) (actual time=0.072..17.272 rows=875 loops=1)
+  Buffers: shared hit=2443 read=665
+  ->  Index Scan Backward using jobs_posted_idx on jobs j  (cost=0.42..1109.18 rows=90 width=52) (actual time=0.047..9.354 rows=875 loops=1)
+        Index Cond: (posted_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+        Filter: ((title ~~* '%data analyst%'::text) AND (status = 'OPEN'::text) AND ((city_id = 1) OR (workplace_type = 'REMOTE'::text)))
+        Rows Removed by Filter: 15608
+        Buffers: shared hit=311 read=172
+  ->  Index Scan using companies_pkey on companies c  (cost=0.29..6.89 rows=1 width=25) (actual time=0.009..0.009 rows=1 loops=875)
+        Index Cond: (company_id = j.company_id)
+        Buffers: shared hit=2132 read=493
+Planning:
+  Buffers: shared hit=311 read=10
+Planning Time: 1.864 ms
+Execution Time: 17.360 ms
+=== R06 run 2 ===
+Nested Loop  (cost=0.71..1728.86 rows=90 width=69) (actual time=0.027..10.229 rows=875 loops=1)
+  Buffers: shared hit=3108
+  ->  Index Scan Backward using jobs_posted_idx on jobs j  (cost=0.42..1109.18 rows=90 width=52) (actual time=0.020..8.454 rows=875 loops=1)
+        Index Cond: (posted_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+        Filter: ((title ~~* '%data analyst%'::text) AND (status = 'OPEN'::text) AND ((city_id = 1) OR (workplace_type = 'REMOTE'::text)))
+        Rows Removed by Filter: 15608
+        Buffers: shared hit=483
+  ->  Index Scan using companies_pkey on companies c  (cost=0.29..6.89 rows=1 width=25) (actual time=0.002..0.002 rows=1 loops=875)
+        Index Cond: (company_id = j.company_id)
+        Buffers: shared hit=2625
+Planning:
+  Buffers: shared hit=321
+Planning Time: 0.413 ms
+Execution Time: 10.294 ms
+=== R06 run 3 ===
+Nested Loop  (cost=0.71..1728.86 rows=90 width=69) (actual time=0.029..9.994 rows=875 loops=1)
+  Buffers: shared hit=3108
+  ->  Index Scan Backward using jobs_posted_idx on jobs j  (cost=0.42..1109.18 rows=90 width=52) (actual time=0.020..8.307 rows=875 loops=1)
+        Index Cond: (posted_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+        Filter: ((title ~~* '%data analyst%'::text) AND (status = 'OPEN'::text) AND ((city_id = 1) OR (workplace_type = 'REMOTE'::text)))
+        Rows Removed by Filter: 15608
+        Buffers: shared hit=483
+  ->  Index Scan using companies_pkey on companies c  (cost=0.29..6.89 rows=1 width=25) (actual time=0.002..0.002 rows=1 loops=875)
+        Index Cond: (company_id = j.company_id)
+        Buffers: shared hit=2625
+Planning:
+  Buffers: shared hit=321
+Planning Time: 0.415 ms
+Execution Time: 10.064 ms

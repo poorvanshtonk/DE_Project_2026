@@ -1,0 +1,24 @@
+=== R23 run 1 ===
+Index Scan using members_lower_email_idx on members  (cost=0.42..8.44 rows=1 width=16) (actual time=0.023..0.023 rows=1 loops=1)
+  Index Cond: (lower(email) = 'yash.sharma1023@gmail.com'::text)
+  Buffers: shared read=4
+Planning:
+  Buffers: shared hit=106
+Planning Time: 0.179 ms
+Execution Time: 0.053 ms
+=== R23 run 2 ===
+Index Scan using members_lower_email_idx on members  (cost=0.42..8.44 rows=1 width=16) (actual time=0.018..0.019 rows=1 loops=1)
+  Index Cond: (lower(email) = 'yash.sharma1023@gmail.com'::text)
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=106
+Planning Time: 0.210 ms
+Execution Time: 0.031 ms
+=== R23 run 3 ===
+Index Scan using members_lower_email_idx on members  (cost=0.42..8.44 rows=1 width=16) (actual time=0.017..0.017 rows=1 loops=1)
+  Index Cond: (lower(email) = 'yash.sharma1023@gmail.com'::text)
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=106
+Planning Time: 0.185 ms
+Execution Time: 0.029 ms
