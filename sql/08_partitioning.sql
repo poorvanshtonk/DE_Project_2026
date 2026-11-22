@@ -71,3 +71,10 @@ SELECT count(*)
 FROM applications_partitioned
 WHERE applied_at >= TIMESTAMPTZ '2026-06-01 00:00:00+05:30'
   AND applied_at <  TIMESTAMPTZ '2026-07-01 00:00:00+05:30';
+
+-- Helper query to inspect row distribution across individual partitions:
+-- SELECT tableoid::regclass AS partition_name, count(*) AS total_rows
+-- FROM applications_partitioned
+-- GROUP BY 1
+-- ORDER BY 1;
+
