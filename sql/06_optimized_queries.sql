@@ -4,6 +4,7 @@
 SET search_path TO linkedin;
 BEGIN;
 
+-- Reads: profile and network
 -- @R01
 -- Profile header: member 1023 with their current position and company
 SELECT m.member_id, m.first_name, m.last_name, m.headline, p.title, c.company_name
@@ -67,6 +68,7 @@ GROUP BY suggestion
 ORDER BY mutuals DESC, suggestion
 LIMIT 20;
 
+-- Reads: job search and applications
 -- @R06
 -- Job search: open "data analyst" jobs in Bengaluru or remote, posted in the last 30 days of June 2026
 SELECT j.job_id, j.title, c.company_name, j.workplace_type, j.min_salary_lpa, j.max_salary_lpa, j.posted_at
@@ -106,6 +108,7 @@ JOIN companies c ON c.company_id = j.company_id
 WHERE a.member_id = 1023
 ORDER BY a.applied_at DESC;
 
+-- Reads: invitations and profile engagement
 -- @R10
 -- Invitations tab: pending invitations received by member 1023
 SELECT i.invitation_id, i.sender_id, m.first_name, m.last_name, i.note, i.sent_at
@@ -141,6 +144,7 @@ WHERE NOT EXISTS (
     SELECT 1 FROM profile_views v WHERE v.viewer_id = m.member_id
 );
 
+-- Reads: talent and career insights
 -- @R14
 -- Talent insights: average days from application to hire, per company (2026 hires)
 SELECT c.company_name, count(*) AS hires,
@@ -192,6 +196,7 @@ GROUP BY nxt.company_name
 ORDER BY moved DESC
 LIMIT 15;
 
+-- Reads: recruiter, employer, and platform reporting
 -- @R18
 -- Recruiter search: open-to-work Bengaluru members with SQL skill, most endorsed first
 SELECT m.member_id, m.first_name, m.last_name, m.headline, ms.endorsements
@@ -264,6 +269,7 @@ SELECT member_id, first_name, last_name, is_premium
 FROM members
 WHERE lower(email) = 'yash.sharma1023@gmail.com';
 
+-- Reads: growth and career insights
 -- @R24
 -- Growth: invitation acceptance rate of Premium vs free senders (2026)
 SELECT m.is_premium, count(*) AS invitations,
@@ -285,6 +291,7 @@ WHERE start_date - prev_end > 182
 ORDER BY gap_days DESC, member_id
 LIMIT 100;
 
+-- Writes: transaction-safe benchmark cases (the final ROLLBACK restores the data)
 -- @W01
 -- "Easy Apply": member 1023 applies to job 14075
 INSERT INTO applications (application_id, job_id, member_id, applied_at, easy_apply, status, status_updated_at)
